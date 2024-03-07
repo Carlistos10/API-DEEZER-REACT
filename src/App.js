@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Album } from './components/album';
 import { Artista } from './components/artista';
@@ -7,11 +7,13 @@ import { Eliminar } from './components/eliminar';
 import { Favorito } from './components/favorito';
 import { Tarjeta } from './components/tarjeta';
 
-async function fetchData() {
-  var ajustesBusqueda1 = {
+async function fetchData(searchTerm) {
+  if (!searchTerm) return [];
+
+  const ajustesBusqueda = {
     "async": true,
     "crossDomain": true,
-    "url": "https://deezerdevs-deezer.p.rapidapi.com/search?q=mora",
+    "url": `https://deezerdevs-deezer.p.rapidapi.com/search?q=${searchTerm}`,
     "method": "GET",
     "headers": {
       "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
@@ -19,26 +21,51 @@ async function fetchData() {
     }
   }
 
-  // Realizar la búsqueda del artista
-  fetch(ajustesBusqueda1.url, {
-    method: ajustesBusqueda1.method,
-    headers: ajustesBusqueda1.headers
+  return fetch(ajustesBusqueda.url, {
+    method: ajustesBusqueda.method,
+    headers: ajustesBusqueda.headers
   })
     .then(response => response.json())
-    .then(resultadoBusqueda1 => {
+    .then(resultadoBusqueda => {
       console.log("Array de la busqueda: ");
-      console.log(resultadoBusqueda1);
+      console.log(resultadoBusqueda);
+      return resultadoBusqueda.data || [];
+    })
+    .catch(error => {
+      console.error('Error al realizar la búsqueda:', error);
+      return [];
     });
 }
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
-    fetchData();
-  }, []); // Empty dependency array ensures useEffect runs only once when the component mounts
+    fetchData(searchTerm)
+      .then(results => setSearchResults(results));
+  }, [searchTerm]);
+
+  const handleSearchInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
+        <input 
+          type="text" 
+          placeholder="Buscar..." 
+          value={searchTerm} 
+          onChange={handleSearchInputChange} 
+        />
+        {searchResults && searchResults.length > 0 ? (
+          <ul>
+            {searchResults.map(item => (
+              <li key={item.id}>{item.title}</li>
+            ))}
+          </ul>
+        ) : null}
         <Album />
         <Artista />
         <Cancion />
@@ -51,3 +78,4 @@ function App() {
 }
 
 export default App;
+
