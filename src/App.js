@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Album } from './components/album';
 import { Artista } from './components/artista';
@@ -41,13 +41,15 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  useEffect(() => {
-    fetchData(searchTerm)
-      .then(results => setSearchResults(results));
-  }, [searchTerm]);
-
   const handleSearchInputChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      fetchData(searchTerm)
+        .then(results => setSearchResults(results));
+    }
   };
 
   return (
@@ -57,7 +59,8 @@ function App() {
           type="text" 
           placeholder="Buscar..." 
           value={searchTerm} 
-          onChange={handleSearchInputChange} 
+          onChange={handleSearchInputChange}
+          onKeyPress={handleKeyPress} // Agrega el controlador de eventos para la tecla Enter
         />
         {searchResults && searchResults.length > 0 ? (
           <ul>
