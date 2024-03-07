@@ -53,29 +53,38 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <input 
-          type="text" 
-          placeholder="Buscar..." 
-          value={searchTerm} 
+    <div className=''>
+      <div className=''>
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
           onChange={handleSearchInputChange}
-          onKeyPress={handleKeyPress} // Agrega el controlador de eventos para la tecla Enter
+          onKeyPress={handleKeyPress}
         />
         {searchResults && searchResults.length > 0 ? (
-          <ul>
-            {searchResults.map(item => (
-              <li key={item.id}>{item.title}</li>
+          <div className='row container'>
+
+            {/* Dividir el array en subarrays de tamaño 4 */}
+            {searchResults.reduce((rows, item, index) => (index % 4 === 0 ? rows.push([item]) : rows[rows.length - 1].push(item)) && rows, []).map((row, rowIndex) => (
+              <div className='row' key={rowIndex}>
+                {row.map(item => (
+                  <div className='col-4' key={item.id}>
+                    <Tarjeta data={item} />
+                  </div>
+                ))}
+              </div>
             ))}
-          </ul>
+
+          </div>
         ) : null}
         <Album />
         <Artista />
         <Cancion />
         <Eliminar />
         <Favorito />
-        <Tarjeta />
-      </header>
+      </div>
+      <div className="cb"></div>
     </div>
   );
 }
