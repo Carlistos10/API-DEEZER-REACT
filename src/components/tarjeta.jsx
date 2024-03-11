@@ -1,5 +1,10 @@
 import React from 'react';
 import './tarjeta.css'
+import { Album } from './album';
+import { Artista } from './artista';
+import { Cancion } from './cancion';
+
+
 
 export const Tarjeta = ({ data }) => {
     const {
@@ -13,22 +18,26 @@ export const Tarjeta = ({ data }) => {
     return (
         <div className="container">
             <a href="#">
+                <Cancion data />
                 <div className="card">
                     <div className="imgBx">
                         <img src={`${album.cover_medium}`} alt='' />
+
                     </div>
                     <div className="contentBx">
                         <h2>{title}</h2>
                         <div className="size">
                             <h3>Artista :</h3>
-                            <a href="artista.jsx"><span>{artist.name}</span></a>
+                            <a href=""><span>{artist.name}</span></a>
+                            <Artista data={artist} />
 
                         </div>
                         <div className="color">
                             <h3>Album :</h3>
-                            <a href="album.jsx"><span>{album.title}</span></a>
+                            <a href=""><span>{album.title}</span></a>
+                            <Album data={album} />
                         </div>
-                        <a className="esp" href="cancion.jsx">Guardar</a>
+                        <a className="esp" href="">Guardar</a>
                         {/*Deberia llevar a informacion mas detallada de la cancion*/}
                     </div>
                 </div>
