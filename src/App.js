@@ -6,6 +6,7 @@ import { Cancion } from './components/cancion';
 import { Eliminar } from './components/eliminar';
 import { Favorito } from './components/favorito';
 import { Tarjeta } from './components/tarjeta';
+import { Busqueda } from './components/busqueda';
 
 async function fetchData(searchTerm) {
   if (!searchTerm) return [];
@@ -55,34 +56,13 @@ function App() {
   return (
     <div className=''>
       <div className=''>
-        <input
-          type="text"
-          placeholder="Buscar..."
-          value={searchTerm}
-          onChange={handleSearchInputChange}
-          onKeyPress={handleKeyPress}
-        />
-        {searchResults && searchResults.length > 0 ? (
-          <div className='row container'>
-
-            {/* Dividir el array en subarrays de tamaño 4 */}
-            {searchResults.reduce((rows, item, index) => (index % 4 === 0 ? rows.push([item]) : rows[rows.length - 1].push(item)) && rows, []).map((row, rowIndex) => (
-              <div className='row' key={rowIndex}>
-                {row.map(item => (
-                  <div className='col-4' key={item.id}>
-                    <Tarjeta data={item} />
-                  </div>
-                ))}
-              </div>
-            ))}
-
-          </div>
-        ) : null}
-        <Album />
-        <Artista />
-        <Cancion />
-        <Eliminar />
-        <Favorito />
+       
+       <Busqueda/>
+    <Album/>
+    <Artista/>
+    <Cancion/>
+    <Eliminar/>
+    
       </div>
       <div className="cb"></div>
     </div>
@@ -90,4 +70,3 @@ function App() {
 }
 
 export default App;
-
