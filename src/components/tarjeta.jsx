@@ -12,24 +12,27 @@ export const Tarjeta = ({ data }) => {
 
     return (
         <div className="container">
-            <div className="card">
-                <div className="imgBx">
-                    <img src={`${album.cover_medium}`} alt='' />
-                </div>
-                <div className="contentBx">
-                    <h2>{title}</h2>
-                    <div className="size">
-                        <h3>Artista :</h3>
-                        <span>{artist.name}</span>
+            <a href="#">
+                <div className="card">
+                    <div className="imgBx">
+                        <img src={`${album.cover_medium}`} alt='' />
                     </div>
-                    <div className="color">
-                        <h3>Album :</h3>
-                        <span>{album.title}</span>
+                    <div className="contentBx">
+                        <h2>{title}</h2>
+                        <div className="size">
+                            <h3>Artista :</h3>
+                            <a href="artista.jsx"><span>{artist.name}</span></a>
+
+                        </div>
+                        <div className="color">
+                            <h3>Album :</h3>
+                            <a href="album.jsx"><span>{album.title}</span></a>
+                        </div>
+                        <a className="esp" href="cancion.jsx">Guardar</a>
+                        {/*Deberia llevar a informacion mas detallada de la cancion*/}
                     </div>
-                    <a className="esp" href="#">Mas info</a>
-                    {/*Deberia llevar a informacion mas detallada de la cancion*/}
                 </div>
-            </div>
+            </a>
         </div>
     );
 };
