@@ -1,0 +1,15 @@
+.main-container {
+    display: flex;
+    gap: 10px;
+    /* Optional spacing between columns */
+}
+
+.left-container {
+    background-color: red;
+    width: 20%;
+}
+
+.right-container {
+    background-color: rgb(0, 0, 255);
+    width: 100%;
+}
