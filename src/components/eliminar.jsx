@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import './eliminar.css'
 
-export const Eliminar = () => {
+export const Eliminar = ({ onEliminar }) => {
     return (
-        <div>eliminar</div>
-    )
-}
+        <button onClick={onEliminar} className='boton'>Eliminar</button>
+    );
+};
