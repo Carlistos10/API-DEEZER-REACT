@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import './App.css';
-import { Album } from './components/album';
-import { Artista } from './components/artista';
-import { Cancion } from './components/cancion';
-import { Eliminar } from './components/eliminar';
-import { Favorito } from './components/favorito';
-import { Tarjeta } from './components/tarjeta';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Busqueda } from './components/busqueda';
+import Cancion from './components/cancion';
+import { Artista } from './components/artista';
+import { Album } from './components/album';
+
 
 function App() {
-
   return (
-    <div className=''>
-      <div className=''>
-       
-       <Busqueda/>
+    <Router>
+      <div>
+        <Routes>
+          <Route exact path="/" element={<Busqueda />} />
+          <Route path="/detalleCancion/:artist/:album/:cancion" element={<Cancion />} />
+          <Route path="/detalleArtista/:artist" element={<Artista />} />
+          <Route path="/detalleAlbum/:album" element={<Album />} />
+        </Routes>
       </div>
-      <div className="cb"></div>
-    </div>
+    </Router>
   );
 }
 
