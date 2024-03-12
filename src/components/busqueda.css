@@ -5,11 +5,45 @@
 }
 
 .left-container {
-    background-color: red;
-    width: 20%;
+    background-color: rgb(194, 194, 194);
+    width: 30%;
 }
 
 .right-container {
-    background-color: rgb(0, 0, 255);
+    background-color: rgb(194, 194, 194);
     width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.barra-busqueda {
+    width: 70%;
+    height: 40px;
+    line-height: 40px;
+    background: #fff;
+    padding: 0 20px;
+    border-radius: 100px;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    border-color: gray;
+    border-width: 1px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.botones {
+    text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    text-decoration: none;
+    background: #9bdc28;
+    box-shadow: 0px 5px 0px 0px #74ad12;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.izq {
+    margin-left: 20px;
 }
