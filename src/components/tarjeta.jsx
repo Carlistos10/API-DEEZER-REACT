@@ -1,47 +1,36 @@
 import React from 'react';
-import './tarjeta.css'
-import { Album } from './album';
-import { Artista } from './artista';
-import { Cancion } from './cancion';
-
+import { Link } from 'react-router-dom';
+import './tarjeta.css';
 
 
 export const Tarjeta = ({ data }) => {
-    const {
-        title,
-        album,
-        artist,
+  const { title, album, artist } = data;
 
-
-    } = data;
-
-    return (
-        <div className="container">
-            <a href="#">
-                <Cancion data />
-                <div className="card">
-                    <div className="imgBx">
-                        <img src={`${album.cover_medium}`} alt='' />
-
-                    </div>
-                    <div className="contentBx">
-                        <h2>{title}</h2>
-                        <div className="size">
-                            <h3>Artista :</h3>
-                            <a href=""><span>{artist.name}</span></a>
-                            <Artista data={artist} />
-
-                        </div>
-                        <div className="color">
-                            <h3>Album :</h3>
-                            <a href=""><span>{album.title}</span></a>
-                            <Album data={album} />
-                        </div>
-                        <a className="esp" href="">Guardar</a>
-                        {/*Deberia llevar a informacion mas detallada de la cancion*/}
-                    </div>
-                </div>
-            </a>
+  return (
+    <div className="container">
+      <div className="card">
+        <Link to={`/detalleCancion/${artist.name}/${album.title}/${title}`}>
+          <div className="imgBx">
+            <img src={album.cover_medium} alt='' />
+          </div>
+        </Link>
+        <div className="contentBx">
+          <h2>{title}</h2>
+          <div className="size">
+            <h3>Artista :</h3>
+            <Link to={`/detalleArtista/${artist.name}`}>
+              <span>{artist.name}</span>
+            </Link>
+          </div>
+          <div className="color">
+            <h3>Álbum :</h3>
+            <Link to={`/detalleAlbum/${album.title}`}>
+              <span>{album.title}</span>
+            </Link>
+          </div>
         </div>
-    );
+      </div>
+
+    </div >
+  );
 };
