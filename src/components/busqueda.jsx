@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Tarjeta } from './tarjeta';
 import './busqueda.css'
+import { Eliminar } from './eliminar';
 
 
-export const Busqueda = () => {
+
+export const Busqueda = ({ playList }) => {
   async function fetchData(searchTerm) {
     if (!searchTerm) return [];
 
@@ -35,6 +37,7 @@ export const Busqueda = () => {
   }
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [playlist, setPlaylist] = useState([]);
 
   const handleSearchInputChange = (event) => {
     setSearchTerm(event.target.value);
@@ -46,25 +49,57 @@ export const Busqueda = () => {
         .then(results => setSearchResults(results));
     }
   };
+  console.log(searchResults)
+  console.log(playList);
+
+  const addToPlaylist = (preview, title) => {
+    // Actualizar el estado de la playlist con el nuevo preview
+    setPlaylist([...playlist, { preview, title }]);
+    console.log("Playlist actualizada:", playlist);
+  };
+
+  const removeFromPlaylist = (index) => {
+    const updatedPlaylist = [...playlist];
+    updatedPlaylist.splice(index, 1);
+    setPlaylist(updatedPlaylist);
+  };
+
   return (
     <div>
       <div className="main-container">
         <div className="left-container">
           <input
+            className='barra-busqueda'
             type="text"
             placeholder="Buscar..."
             value={searchTerm}
             onChange={handleSearchInputChange}
             onKeyPress={handleKeyPress}
           />
-
+          <div className="">
+            <h2 className='izq'>Playlist:</h2>
+            <ul>
+              {playlist.map((item, index) => (
+                <li key={index}>
+                  <p>{item.title}</p>
+                  <audio controls style={{ width: '100%' }}>
+                    <source src={item.preview}></source>
+                  </audio>
+                  <Eliminar onEliminar={() => removeFromPlaylist(index)} />
+                </li>
+              ))}
+            </ul>
+          </div>
           {searchResults.length === 0 && searchTerm !== '' && (
             <p className="error-message">No se encontraron resultados para tu búsqueda.</p>
           )}
         </div>
         <div className="right-container">
           {searchResults.length === 0 && searchTerm !== '' ? (
-            <p className="error-message"></p>
+
+            <div>
+              <p className="error-message"></p>
+            </div>
           ) : (
 
             searchResults.length > 0 && (
@@ -76,6 +111,9 @@ export const Busqueda = () => {
                     {row.map(item => (
                       <div className='col-4' key={item.id}>
                         <Tarjeta data={item} />
+                        <button onClick={() => addToPlaylist(item.preview, item.title)} className='botones'>
+                          Guardar en la playlist
+                        </button>
                       </div>
                     ))}
                   </div>
