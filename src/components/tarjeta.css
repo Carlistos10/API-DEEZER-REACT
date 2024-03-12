@@ -5,11 +5,12 @@
 body {
     justify-content: center;
     align-items: center;
-    background: #8f7070;
+    background: rgb(194, 194, 194);
 }
 
 .container {
     position: relative;
+    width: 25%;
 }
 
 .card {
@@ -19,6 +20,7 @@ body {
     background: #232323;
     border-radius: 20px;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .container .card:before {
@@ -181,4 +183,10 @@ body {
     opacity: 1;
     transform: translateY(0px);
 
+}
+
+.rowcv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
