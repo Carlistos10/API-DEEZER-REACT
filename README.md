@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+To install everything, it's necessary to install three packages first:
+
+### `npm i`
+
+### `npm add react`
+
+### `npm add react-router-dom`
+
 In the project directory, you can run:
 
 ### `npm start`
